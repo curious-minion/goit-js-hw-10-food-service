@@ -4,29 +4,32 @@ export const Theme = {
 };
 
 const lightTheme = Theme.LIGHT;
-const switcher = document.getElementById('#theme-switch-toggle');
-const currentTheme = localStorage.getItem('theme');
-
-export function addClassBody(currentTheme) {
-  if (currentTheme) {
-  body.classList.add(currentTheme);
- if (currentTheme === 'Theme.DARK') {
-        switcher.checked = true;
-    }
-}
-}
-
+const darkTheme = Theme.DARK;
+export const switcher = document.querySelector('#theme-switch-toggle');
+const bodyEl = document.querySelector('body');
 
 export function switchTheme(e) {
+
     if (e.target.checked) {
-        body.classList.add(currentTheme);
-        localStorage.setItem('theme', 'Theme.DARK');
+        bodyEl.classList.replace(lightTheme, darkTheme);
+        localStorage.setItem('theme', darkTheme);
     }
-    else { body.classList.add(lightTheme);
-          localStorage.setItem('theme', lightTheme);
-    }    
+    else {
+      bodyEl.classList.replace(darkTheme, lightTheme);
+      localStorage.setItem('theme', lightTheme);
+  }
 }
 
+export function addClassBody() {
+  const currentTheme = localStorage.getItem('theme');
+  bodyEl.classList.add(currentTheme);
+
+  if (currentTheme === darkTheme) {
+    switcher.checked = true;
+    bodyEl.classList.add(darkTheme);
+    localStorage.setItem('theme', darkTheme);
+  }
+}
 
 
 
