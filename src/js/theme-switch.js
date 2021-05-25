@@ -21,11 +21,11 @@ export function switchTheme(e) {
 }
 
 export function addClassBody() {
-  const currentTheme = localStorage.getItem('theme');
+  const currentTheme = localStorage.getItem('theme') || Theme.LIGHT;
   bodyEl.classList.add(currentTheme);
 
   if (currentTheme === darkTheme) {
-    switcher.checked = true;
+    switcher.checked = currentTheme === Theme.DARK;
     bodyEl.classList.add(darkTheme);
     localStorage.setItem('theme', darkTheme);
   }
